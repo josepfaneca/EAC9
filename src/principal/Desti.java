@@ -25,7 +25,7 @@ public class Desti implements Component, List {
     private String nom;
     private String continent;
     private  List<Component> components = new ArrayList<>();
-    private int pCodi;
+    private int pCodi; //atribut de paràmetre pCodi
     //private Component[] components = new Component[220];
     //private int posicioComponents = 0; //Priemra posició buida del vector de components
 
