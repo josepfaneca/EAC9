@@ -4,9 +4,8 @@
  */
 package principal;
 
-import components.Guia;
-import components.VisitaLliure;
-import components.VisitaPagament;
+import components.*;
+import java.awt.Component;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import persistencia.GestorPersistencia;
@@ -25,6 +24,7 @@ public class Application {
     static boolean loop = true;
     static private String FITXER = "desti";
     static private GestorPersistencia gp = new GestorPersistencia();
+    static Component c;
 
     public static void main(String[] args) {
 

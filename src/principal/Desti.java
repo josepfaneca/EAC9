@@ -262,7 +262,7 @@ public class Desti implements Component, List {
                 throw new GestioExcursionsExcepcio("3");
             } else {
                 boolean insertat;
-                insertat = components.add(this);
+                insertat = components.add(nouGuia);
                 if (insertat) {
                     System.out.println("S'ha insertat un nou guia amb el codi:[" + this.getCodi() + "]");
                     System.out.println(components.size());
@@ -291,16 +291,17 @@ public class Desti implements Component, List {
 //        }
 //    }
 
-    public void addVisitaLliure(VisitaLliure novaVisita) throws GestioExcursionsExcepcio {
+    public void addVisitaLliure(Component novaVisita) throws GestioExcursionsExcepcio {
 
-        //novaVisita = VisitaLliure.addVisitaLliure(); modificat de moment
-
-        if (selectComponent(2, novaVisita.getCodi()) != -1) {
-            throw new GestioExcursionsExcepcio("3");
+        if (novaVisita == null) {
+            novaVisita = VisitaLliure.addVisitaLliure();// modificat de moment
         } else {
-            components.add(novaVisita);
+            if (selectComponent(2, ((VisitaLliure) novaVisita).getCodi()) != -1) {
+                throw new GestioExcursionsExcepcio("3");
+            } else {
+                components.add(novaVisita);
+            }
         }
-
     }
 //    public void addVisitaLliure() throws GestioExcursionsExcepcio {
 //
@@ -314,14 +315,16 @@ public class Desti implements Component, List {
 //
 //    }
 
-    public void addVisitaPagament(VisitaPagament novaVisita) throws GestioExcursionsExcepcio {
+    public void addVisitaPagament(Component novaVisitaP) throws GestioExcursionsExcepcio {
 
-        //novaVisita = VisitaPagament.addVisitaPagament(); modificat de moment
-
-        if (selectComponent(3, novaVisita.getCodi()) != -1) {
-            throw new GestioExcursionsExcepcio("3");
+        if (novaVisitaP == null) {
+            novaVisitaP = VisitaPagament.addVisitaPagament(); //modificat de moment
         } else {
-            components.add(novaVisita);
+            if (selectComponent(3, ((VisitaPagament) novaVisitaP).getCodi()) != -1) {
+                throw new GestioExcursionsExcepcio("3");
+            } else {
+                components.add(novaVisitaP);
+            }
         }
     }
 //    public void addVisitaPagament() throws GestioExcursionsExcepcio {
@@ -335,14 +338,16 @@ public class Desti implements Component, List {
 //        }
 //    }
 
-    public void addExcursio(Excursio novaExcursio) throws GestioExcursionsExcepcio {
-
-        //novaExcursio = Excursio.addExcursio(); modificat de moment
-
-        if (selectComponent(4, novaExcursio.getCodi()) != -1) {
-            throw new GestioExcursionsExcepcio("3");
+    public void addExcursio(Component novaExcursio) throws GestioExcursionsExcepcio {
+        if (novaExcursio == null) {
+            novaExcursio = Excursio.addExcursio(); //modificat de moment
         } else {
-            components.add(novaExcursio);
+            if (selectComponent(4, ((Excursio) novaExcursio).getCodi()) != -1) {
+                throw new GestioExcursionsExcepcio("3");
+            } else {
+                components.add(novaExcursio);
+            }
+
         }
     }
 //    public void addExcursio() throws GestioExcursionsExcepcio {
