@@ -253,23 +253,23 @@ public class Desti implements Component, List {
         System.out.println("\nContinent:" + continent);
     }
 
-    public void addGuia(Guia nouGuia) throws GestioExcursionsExcepcio {
+    public void addGuia(Component nouGuia) throws GestioExcursionsExcepcio {
 
-        //nouGuia = Guia.addGuia(); de moment ho deixem així
-
-        if (selectComponent(1, nouGuia.getCodi()) != -1) {
-            throw new GestioExcursionsExcepcio("3");
+        if (nouGuia == null) {
+            nouGuia = Guia.addGuia(); //de moment ho deixem així
         } else {
-            boolean insertat;
-            insertat = components.add(this);
-            if (insertat) {
-                System.out.println("S'ha insertat un nou guia amb el codi:[" + this.getCodi() + "]");
-                System.out.println(components.size());
+            if (selectComponent(1, ((Guia) nouGuia).getCodi()) != -1) {
+                throw new GestioExcursionsExcepcio("3");
             } else {
-                System.out.println("NO S'HA INSERT EL GUIA:[" + this.getCodi() + "]");
-
+                boolean insertat;
+                insertat = components.add(this);
+                if (insertat) {
+                    System.out.println("S'ha insertat un nou guia amb el codi:[" + this.getCodi() + "]");
+                    System.out.println(components.size());
+                } else {
+                    System.out.println("NO S'HA INSERT EL GUIA:[" + this.getCodi() + "]");
+                }
             }
-
         }
     }
 //    public void addGuia() throws GestioExcursionsExcepcio {
