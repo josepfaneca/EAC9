@@ -1,11 +1,13 @@
 package persistencia;
 
 import java.io.File;
+import java.io.IOException;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.*;
+import org.xml.sax.SAXException;
 import principal.GestioExcursionsExcepcio;
 import principal.Desti;
 
@@ -55,6 +57,16 @@ public class GestorXML implements ProveedorPersistencia {
      *Retorn: cap
      */
     public void construeixModel(Desti desti) throws GestioExcursionsExcepcio {
+        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+        try {
+            DocumentBuilder builder = builderFactory.newDocumentBuilder();
+            File f = new File("FITXER");
+            doc = builder.parse(f);
+        } catch (IOException | ParserConfigurationException | SAXException e) {
+            System.out.println("Error en la lectura del document: "+ e);
+        }
+        
+        
        
     }
 

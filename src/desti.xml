@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<desti codi="1" continent="Europa" nom="Mallorca">
+  <guia adreca="C/Dofí,13" codi="G1111" nom="Bernat" telefon="000000000"/>
+  <visitaLliure adreca="Sóller" codi="VL2222" coordenades="39-46-16N-2-44-06E" durada="120" nom="Biniaraix"/>
+  <visitaPagament adreca="Ctra Banyalbufar, Km 1.5, Esporles" codi="VP3333" coordenades="N39-40-134-E2-33-55" durada="120" nom="Granja d'Esporles" preu="15.5"/>
+ <excursio codi="E4444" nom="Serra de Tramuntana" preu="35.5">
+    <visitaLliure adreca="Sóller" codi="VL2222" coordenades="39-46-16N-2-44-06E" durada="120" nom="Biniaraix"/>
+    <guia adreca="C/Dofí,13" codi="G1111" nom="Bernat" telefon="000000000"/>
+    <visitaPagament adreca="Ctra Banyalbufar, Km 1.5, Esporles" codi="VP3333" coordenades="N39-40-134-E2-33-55" durada="120" nom="Granja   d'Esporles" preu="15.5"/>
+  </excursio>
+</desti>
