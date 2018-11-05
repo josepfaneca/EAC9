@@ -1,6 +1,5 @@
 package persistencia;
 
-import com.sun.org.apache.xerces.internal.dom.DocumentImpl;
 import components.*;
 import java.io.File;
 import javax.xml.parsers.*;
@@ -60,85 +59,86 @@ public class GestorXML implements ProveedorPersistencia {
         DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder builder = builderFactory.newDocumentBuilder();
-            doc = new DocumentImpl();
-            Element root = doc.createElement("destí");
-            root.setAttribute("codi", Integer.toString(desti.getCodi()));
-            root.setAttribute("continent", desti.getContinent());
-            root.setAttribute("nom", desti.getNom());
+            doc = builder.newDocument();
+            Element arrel = doc.createElement("destí");
+            arrel.setAttribute("codi", Integer.toString(desti.getCodi()));
+            arrel.setAttribute("continent", desti.getContinent());
+            arrel.setAttribute("nom", desti.getNom());
 
             for (Component comp : desti.getComponents()) {
-                Element element;
+                Element fill;
                 if (comp == null) {
                     throw new GestioExcursionsExcepcio("1");
                 } else if (comp instanceof Guia) {
                     Guia guia = (Guia) comp;
-                    element = doc.createElement("Guia");
-                    element.setAttribute("codi", guia.getCodi());
-                    element.setAttribute("nom", guia.getNom());
-                    element.setAttribute("adreca", guia.getAdreca());
-                    element.setAttribute("telefon", guia.getTelefon());
-                    root.appendChild(element);
+                    fill = doc.createElement("Guia");
+                    fill.setAttribute("codi", guia.getCodi());
+                    fill.setAttribute("nom", guia.getNom());
+                    fill.setAttribute("adreca", guia.getAdreca());
+                    fill.setAttribute("telefon", guia.getTelefon());
+                    arrel.appendChild(fill);
                 } else if (comp instanceof VisitaLliure) {
                     VisitaLliure vll = (VisitaLliure) comp;
-                    element = doc.createElement("VisitaLliure");
-                    element.setAttribute("codi", vll.getCodi());
-                    element.setAttribute("nom", vll.getNom());
-                    element.setAttribute("adreca", vll.getAdreca());
-                    element.setAttribute("coordenades", vll.getCoordenades());
-                    element.setAttribute("durada", Integer.toString(vll.getDurada()));
-                    root.appendChild(element);
+                    fill = doc.createElement("VisitaLliure");
+                    fill.setAttribute("codi", vll.getCodi());
+                    fill.setAttribute("nom", vll.getNom());
+                    fill.setAttribute("adreca", vll.getAdreca());
+                    fill.setAttribute("coordenades", vll.getCoordenades());
+                    fill.setAttribute("durada", Integer.toString(vll.getDurada()));
+                    arrel.appendChild(fill);
                 } else if (comp instanceof VisitaPagament) {
                     VisitaPagament vp = (VisitaPagament) comp;
-                    element = doc.createElement("VisitaPagament");
-                    element.setAttribute("codi", vp.getCodi());
-                    element.setAttribute("nom", vp.getNom());
-                    element.setAttribute("adreca", vp.getAdreca());
-                    element.setAttribute("coordenades", vp.getCoordenades());
-                    element.setAttribute("durada", Integer.toString(vp.getDurada()));
-                    element.setAttribute("preu", Double.toString(vp.getPreu()));
-                    root.appendChild(element);
+                    fill = doc.createElement("VisitaPagament");
+                    fill.setAttribute("codi", vp.getCodi());
+                    fill.setAttribute("nom", vp.getNom());
+                    fill.setAttribute("adreca", vp.getAdreca());
+                    fill.setAttribute("coordenades", vp.getCoordenades());
+                    fill.setAttribute("durada", Integer.toString(vp.getDurada()));
+                    fill.setAttribute("preu", Double.toString(vp.getPreu()));
+                    arrel.appendChild(fill);
                 } //s'han d'afegir els components que hi han dins d'Excursió, en cas que 
                 //n'hi hagi;
                 else if (comp instanceof Excursio) {
                     Excursio exc = (Excursio) comp;
-                    element = doc.createElement("Excursio");
-                    element.setAttribute("codi", exc.getCodi());
-                    element.setAttribute("nom", exc.getNom());
-                    element.setAttribute("preu", Double.toString(exc.getPreu()));
-                    root.appendChild(element);
+                    fill = doc.createElement("Excursio");
+                    fill.setAttribute("codi", exc.getCodi());
+                    fill.setAttribute("nom", exc.getNom());
+                    fill.setAttribute("preu", Double.toString(exc.getPreu()));
+                    arrel.appendChild(fill);
 
                     //recórrer el Map d'excursió i afegir com a fills d'Excursió:
                     //guies, visitaPag i VisitaLliure
                     for (Component compExc : exc.getComponents().values()) {
+                        Element fillExc;
                         if (comp == null) {
                             throw new GestioExcursionsExcepcio("1");
                         } else if (compExc instanceof Guia) {
                             Guia guia = (Guia) comp;
-                            element = doc.createElement("Guia");
-                            element.setAttribute("codi", guia.getCodi());
-                            element.setAttribute("nom", guia.getNom());
-                            element.setAttribute("adreca", guia.getAdreca());
-                            element.setAttribute("telefon", guia.getTelefon());
-                            root.appendChild(element);
+                            fillExc = doc.createElement("Guia");
+                            fillExc.setAttribute("codi", guia.getCodi());
+                            fillExc.setAttribute("nom", guia.getNom());
+                            fillExc.setAttribute("adreca", guia.getAdreca());
+                            fillExc.setAttribute("telefon", guia.getTelefon());
+                            fill.appendChild(fillExc);
                         } else if (compExc instanceof VisitaLliure) {
                             VisitaLliure vll = (VisitaLliure) comp;
-                            element = doc.createElement("VisitaLliure");
-                            element.setAttribute("codi", vll.getCodi());
-                            element.setAttribute("nom", vll.getNom());
-                            element.setAttribute("adreca", vll.getAdreca());
-                            element.setAttribute("coordenades", vll.getCoordenades());
-                            element.setAttribute("durada", Integer.toString(vll.getDurada()));
-                            root.appendChild(element);
+                            fillExc = doc.createElement("VisitaLliure");
+                            fillExc.setAttribute("codi", vll.getCodi());
+                            fillExc.setAttribute("nom", vll.getNom());
+                            fillExc.setAttribute("adreca", vll.getAdreca());
+                            fillExc.setAttribute("coordenades", vll.getCoordenades());
+                            fillExc.setAttribute("durada", Integer.toString(vll.getDurada()));
+                            fill.appendChild(fillExc);
                         } else if (compExc instanceof VisitaPagament) {
                             VisitaPagament vp = (VisitaPagament) comp;
-                            element = doc.createElement("VisitaPagament");
-                            element.setAttribute("codi", vp.getCodi());
-                            element.setAttribute("nom", vp.getNom());
-                            element.setAttribute("adreca", vp.getAdreca());
-                            element.setAttribute("coordenades", vp.getCoordenades());
-                            element.setAttribute("durada", Integer.toString(vp.getDurada()));
-                            element.setAttribute("preu", Double.toString(vp.getPreu()));
-                            root.appendChild(element);
+                            fillExc = doc.createElement("VisitaPagament");
+                            fillExc.setAttribute("codi", vp.getCodi());
+                            fillExc.setAttribute("nom", vp.getNom());
+                            fillExc.setAttribute("adreca", vp.getAdreca());
+                            fillExc.setAttribute("coordenades", vp.getCoordenades());
+                            fillExc.setAttribute("durada", Integer.toString(vp.getDurada()));
+                            fillExc.setAttribute("preu", Double.toString(vp.getPreu()));
+                            fill.appendChild(fillExc);
                         } else {
                             throw new GestioExcursionsExcepcio("GestorXML.model");
                         }

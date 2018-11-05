@@ -161,14 +161,14 @@ public class Application {
                 case 5: //Carregar destí
                     posicioDestins = 0;
                     destins = new Desti[1];
-                    gp.carregarDesti("XML", FITXER);
+                    gp.carregarDesti("XML",FITXER);
                     destins[posicioDestins] = gp.getGestor().getDesti();
                     posicioDestins++;
                     break;
                 case 6: //Desar destí
                     pos = selectDesti();
                     if (pos >= 0) {
-                        gp.desarDesti("XML", FITXER, destins[pos]);
+                        gp.desarDesti("XML",FITXER,destins[pos]);
                     } else {
                         System.out.println("\nNo existeix aquest desti");
                     }
