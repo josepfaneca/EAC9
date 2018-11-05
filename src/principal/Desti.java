@@ -24,12 +24,8 @@ public class Desti implements Component, List {
     private static int properCodi = 1; //El proper codi a assignar
     private String nom;
     private String continent;
-    private  List<Component> components = new ArrayList<>();
+    private List<Component> components = new ArrayList<>();
     private int pCodi; //atribut de paràmetre pCodi
-    //private Component[] components = new Component[220];
-    //private int posicioComponents = 0; //Priemra posició buida del vector de components
-
-    //private GestioExcursionsExcepcio existCom = new GestioExcursionsExcepcio("3");
     private String missatge;
 
     /*
@@ -48,15 +44,15 @@ public class Desti implements Component, List {
         nom = pNom;
         continent = pContinent;
     }
-    //constructor tractament XML
-    public Desti(int codi, String nom, String continent, int pCodi, String missatge) {
-        this.codi = codi;
-        this.nom = nom;
-        this.continent = continent;
-        this.pCodi = pCodi;
-        this.missatge = missatge;
+
+    //constructor tractament XML. El pCodi en ve donat, vaig sumant 
+    public Desti(String pNom, String pContinent, int pCodi) {
+        nom = pNom;
+        continent = pContinent;
+        codi = pCodi;
+        properCodi = codi + 1;
     }
-    
+
     /*
      TODO Mètodes accessors    
      */
@@ -91,14 +87,12 @@ public class Desti implements Component, List {
     public void setContinent(String continent) {
         this.continent = continent;
     }
+
     //puc accedir a components i utilitzar els mètodes de List
     public List<Component> getComponents() {
         return components;
     }
 
-//    public void setComponents(List<Component> components) {
-//        this.components = components;
-//    }
     @Override
     public int size() {
         return 0;
@@ -272,24 +266,6 @@ public class Desti implements Component, List {
             }
         }
     }
-//    public void addGuia() throws GestioExcursionsExcepcio {
-//
-//        Guia nouGuia = Guia.addGuia();
-//
-//        if (selectComponent(1, nouGuia.getCodi()) != -1) {
-//            throw new GestioExcursionsExcepcio("3");
-//        } else {
-//            boolean insertat;
-//            insertat = components.add(nouGuia);
-//            if (insertat) {
-//                System.out.println("S'ha insertat un nou guia amb el codi:[" + nouGuia.getCodi() + "]");
-//            } else {
-//                System.out.println("NO S'HA INSERT EL GUIA:[" + nouGuia.getCodi() + "]");
-//
-//            }
-//
-//        }
-//    }
 
     public void addVisitaLliure(Component novaVisita) throws GestioExcursionsExcepcio {
 
@@ -303,17 +279,6 @@ public class Desti implements Component, List {
             }
         }
     }
-//    public void addVisitaLliure() throws GestioExcursionsExcepcio {
-//
-//        VisitaLliure novaVisita = VisitaLliure.addVisitaLliure();
-//
-//        if (selectComponent(2, novaVisita.getCodi()) != -1) {
-//            throw new GestioExcursionsExcepcio("3");
-//        } else {
-//            components.add(novaVisita);
-//        }
-//
-//    }
 
     public void addVisitaPagament(Component novaVisitaP) throws GestioExcursionsExcepcio {
 
@@ -327,16 +292,6 @@ public class Desti implements Component, List {
             }
         }
     }
-//    public void addVisitaPagament() throws GestioExcursionsExcepcio {
-//
-//        VisitaPagament novaVisita = VisitaPagament.addVisitaPagament();
-//
-//        if (selectComponent(3, novaVisita.getCodi()) != -1) {
-//            throw new GestioExcursionsExcepcio("3");
-//        } else {
-//            components.add(novaVisita);
-//        }
-//    }
 
     public void addExcursio(Component novaExcursio) throws GestioExcursionsExcepcio {
         if (novaExcursio == null) {
@@ -350,16 +305,6 @@ public class Desti implements Component, List {
 
         }
     }
-//    public void addExcursio() throws GestioExcursionsExcepcio {
-//
-//        Excursio novaExcursio = Excursio.addExcursio();
-//
-//        if (selectComponent(4, novaExcursio.getCodi()) != -1) {
-//            throw new GestioExcursionsExcepcio("3");
-//        } else {
-//            components.add(novaExcursio);
-//        }
-//    }
 
     public void addComponentExcursio(int tipusComponent) throws GestioExcursionsExcepcio {
         Excursio excursioSel = null;
@@ -435,28 +380,4 @@ public class Desti implements Component, List {
         }
         return posElement;
     }
-
-    public static void main(String[] args) {
-        Desti test = addDesti();
-//
-        try {
-            test.addGuia(Guia.addGuia());
-//            //test.addVisitaLliure();
-//            //test.addVisitaPagament();
-//            //test.addExcursio();
-//            //test.addComponentExcursio(2);*/
-//            /*Iterator<Component> it = components.iterator();
-//            while (it.hasNext()) {
-//                Component next = it.next();
-//                System.out.println(next);
-//            }
-//            test.showComponent();*/
-//
-        } catch (GestioExcursionsExcepcio e) {
-            System.out.println(e.getMessage());
-
-        }
-    }
-    
 }
-

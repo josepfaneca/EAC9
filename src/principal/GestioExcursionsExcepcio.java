@@ -55,8 +55,6 @@ public class GestioExcursionsExcepcio extends Exception {
         this.codiCausa = codiCausa;
     }
     
-
-    
     @Override
     public String getMessage() {
         return "ERROR: [" + RED + codiCausa + RESET +"] : " + RED + missatge + RESET;

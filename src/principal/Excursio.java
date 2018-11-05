@@ -63,6 +63,10 @@ public class Excursio implements Component, Map {
     public void setPreu(double preu) {
         this.preu = preu;
     }
+    
+    public Map<String,Component> getComponents(){
+        return components;
+    }
     //mètodes interface Map
     @Override
     public int size() {
