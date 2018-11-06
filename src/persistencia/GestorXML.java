@@ -62,8 +62,9 @@ public class GestorXML implements ProveedorPersistencia {
             doc = builder.newDocument();
             Element arrel = doc.createElement("destí");
             arrel.setAttribute("codi", Integer.toString(desti.getCodi()));
-            arrel.setAttribute("continent", desti.getContinent());
-            arrel.setAttribute("nom", desti.getNom());
+            arrel.setAttribute("continent",desti.getContinent());
+            arrel.setAttribute("nom",desti.getNom());
+            doc.appendChild(arrel);
 
             for (Component comp : desti.getComponents()) {
                 Element fill;
@@ -156,6 +157,9 @@ public class GestorXML implements ProveedorPersistencia {
         try {
             TransformerFactory tf = TransformerFactory.newInstance();
             Transformer transformer = tf.newTransformer();
+            //https://stackoverflow.com/questions/22790146/create-xml-file-with-linebreaks
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource source = new DOMSource(doc);
             File f = new File(nomFitxer + ".xml");
             StreamResult result = new StreamResult(f);
