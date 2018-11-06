@@ -23,7 +23,7 @@ public class Excursio implements Component, Map {
     private String nom;
     private double preu;
     //private Component[] components = new Component[120];
-    private Map<String,Component> components = new HashMap <>();
+    private final Map<String,Component> components = new HashMap <>();
     
 
     /*

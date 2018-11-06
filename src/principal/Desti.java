@@ -136,10 +136,10 @@ public class Desti implements Component {
                 throw new GestioExcursionsExcepcio("3");
             } else {
                 boolean insertat;
-                insertat = components.add(nouGuia);
+                insertat = this.components.add(nouGuia);
                 if (insertat) {
                     System.out.println("S'ha insertat un nou guia amb el codi:[" + this.getCodi() + "]");
-                    System.out.println(components.size());
+                    System.out.println(this.components.size());
                 } else {
                     System.out.println("NO S'HA INSERT EL GUIA:[" + this.getCodi() + "]");
                 }

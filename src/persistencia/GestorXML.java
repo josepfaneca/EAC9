@@ -55,7 +55,7 @@ public class GestorXML implements ProveedorPersistencia {
      *Retorn: cap
      */
     public void construeixModel(Desti desti) throws GestioExcursionsExcepcio {
-        //extret del material, sempre igual
+        //extret del material
         DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder builder = builderFactory.newDocumentBuilder();
@@ -114,7 +114,7 @@ public class GestorXML implements ProveedorPersistencia {
                         if (comp == null) {
                             throw new GestioExcursionsExcepcio("1");
                         } else if (compExc instanceof Guia) {
-                            Guia guia = (Guia) comp;
+                            Guia guia = (Guia) compExc;
                             fillExc = doc.createElement("Guia");
                             fillExc.setAttribute("codi", guia.getCodi());
                             fillExc.setAttribute("nom", guia.getNom());
@@ -122,7 +122,7 @@ public class GestorXML implements ProveedorPersistencia {
                             fillExc.setAttribute("telefon", guia.getTelefon());
                             fill.appendChild(fillExc);
                         } else if (compExc instanceof VisitaLliure) {
-                            VisitaLliure vll = (VisitaLliure) comp;
+                            VisitaLliure vll = (VisitaLliure) compExc;
                             fillExc = doc.createElement("VisitaLliure");
                             fillExc.setAttribute("codi", vll.getCodi());
                             fillExc.setAttribute("nom", vll.getNom());
@@ -131,7 +131,7 @@ public class GestorXML implements ProveedorPersistencia {
                             fillExc.setAttribute("durada", Integer.toString(vll.getDurada()));
                             fill.appendChild(fillExc);
                         } else if (compExc instanceof VisitaPagament) {
-                            VisitaPagament vp = (VisitaPagament) comp;
+                            VisitaPagament vp = (VisitaPagament) compExc;
                             fillExc = doc.createElement("VisitaPagament");
                             fillExc.setAttribute("codi", vp.getCodi());
                             fillExc.setAttribute("nom", vp.getNom());
@@ -148,7 +148,7 @@ public class GestorXML implements ProveedorPersistencia {
                     throw new GestioExcursionsExcepcio("GestorXML.model");
                 }
             }
-        } catch (Exception ex) {
+        } catch (ParserConfigurationException | DOMException | GestioExcursionsExcepcio ex) {
             throw new GestioExcursionsExcepcio("GestorXML.model");
         }
     }
@@ -160,6 +160,8 @@ public class GestorXML implements ProveedorPersistencia {
             //https://stackoverflow.com/questions/22790146/create-xml-file-with-linebreaks
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            //https://stackoverflow.com/questions/1384802/java-how-to-indent-xml-generated-by-transformer
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
             DOMSource source = new DOMSource(doc);
             File f = new File(nomFitxer + ".xml");
             StreamResult result = new StreamResult(f);
@@ -219,11 +221,15 @@ public class GestorXML implements ProveedorPersistencia {
 
         NodeList nodeList = rootElement.getChildNodes(); //llista de fills per
         //recòrrer
-
+        if (nodeList.getLength()==0) {
+            throw new GestioExcursionsExcepcio(("GestorXML.carrega"));
+        }
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node fill = nodeList.item(i);
+            //https://stackoverflow.com/questions/21170909/error-org-apache-xerces-dom-deferredtextimpl-cannot-be-cast-to-org-w3c-dom-elem/21382952
+            if (fill.getNodeType() != Node.ELEMENT_NODE) continue;//
             //casting i llençar excepció en cas de null
-            if ((Element) fill == null) {
+            if ((Element) fill == null) { //
                 throw new GestioExcursionsExcepcio("GestorXML.carrega");
             }
             //variables per a crear els components
@@ -270,7 +276,8 @@ public class GestorXML implements ProveedorPersistencia {
                 //recòrrer els fills d'Excursió i afegir-los a Excursió
                 for (int j = 0; j < nodeListExc.getLength(); j++) {
                     Node fillExc = nodeListExc.item(j);
-
+                    //https://stackoverflow.com/questions/21170909/error-org-apache-xerces-dom-deferredtextimpl-cannot-be-cast-to-org-w3c-dom-elem/21382952
+                    if (fillExc.getNodeType()!= Node.ELEMENT_NODE) continue;
                     //variables
                     Component compExc;
                     String codiE = ((Element) fillExc).getAttribute("codi");
